@@ -16,7 +16,9 @@ class CategoryController extends Controller
     }
     public function store(StoreCategoryRequest $request)
     {
-        
+        $request->validate(['name' => 'required|string|max:255']);
+        $category = Category::create($request->all());
+        return response()->json($category, 201);
     }
     public function edit(Category $category)
     {
